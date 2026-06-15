@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>会員ログイン</title>
+    </head>
+    <body>
+        <h1>ログインしてください。</h1>
+        <form action="{% url 'shopapp:login' %}" method='POST'>
+            {% csrf_token %}
+			<table>
+                {{form.as_table}}
+			</table>       
+            <input type = "submit" value="ログイン">
+        </form>
+        
+        <a href ="{% url 'shopapp:register_user' %}">会員登録</a>
+
+    </body>
+</html>
