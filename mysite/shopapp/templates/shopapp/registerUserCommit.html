@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>会員登録の完了</title>
+    </head>
+    <body>
+        <p>{{register_user.name}}さんの会員登録が完了しました。</p>
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+    </body>
+</html>

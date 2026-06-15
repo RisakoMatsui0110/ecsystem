@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>商品検索</title>
+    </head>
+    <body>
+        <h1>商品の検索を行います。</h1>
+        
+        
+        <a href ="a">ショッピングカートを見る</a><br>
+        <a href ="a">購入履歴</a><br>
+
+        {% if is_login == True %}
+        <p>ようこそ{{name}}さん</p>
+        <a href ="{% url 'shopapp:user_info' %}">会員情報の確認</a><br>
+        <a href ="{% url 'shopapp:update_user' %}">会員情報の変更</a><br>
+        <a href ="{% url 'shopapp:logout' %}">ログアウト</a><br>
+        
+        {%else%}
+        <a href ="{% url 'shopapp:login' %}">ログイン</a><br>
+        {% endif %}
+        
+        <a href ="a">管理者ページ</a>
+
+    </body>
+</html>

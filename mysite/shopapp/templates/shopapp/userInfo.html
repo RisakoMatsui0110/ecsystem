@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>会員登録の確認</title>
+    </head>
+    <body>
+        <h1>会員情報</h1>
+        <table border="1">
+            <tr>
+                <td>会員ID</td>
+                <td>{{ queryset.user_id }}</td>
+            </tr>
+            <tr>
+                <td>パスワード</td>
+                <td>表示なし</td>
+            </tr>
+            <tr>
+                <td>お名前</td>
+                <td>{{ queryset.name }}</td>
+            </tr>
+            <tr>
+                <td>ご住所</td>
+                <td>{{ queryset.address }}</td>
+            </tr>
+        </table>
+        <a href ="{% url 'shopapp:update_user' %}">会員情報の変更</a><br>
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+
+    </body>
+</html>

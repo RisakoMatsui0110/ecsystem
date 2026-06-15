@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>会員情報</title>
+    </head>
+    <body>
+        <h1>会員情報</h1>
+        <form action="{% url 'shopapp:update_user' %}" method='POST'>
+            {% csrf_token %}
+			<table>
+                {{form.as_table}}
+			</table>
+            <input type = "submit" value="変更確認"> <br>
+        </form>
+        <a href ="a">退会する</a><br>
+        <a href ="a">購入履歴へ</a><br>
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+    
+    </body>
+</html>

@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title>会員情報の更新完了</title>
+    </head>
+    <body>
+        <h1>以下の会員情報で更新しました。</h1>
+        {{ form.as_table }}
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+    </body>
+</html>

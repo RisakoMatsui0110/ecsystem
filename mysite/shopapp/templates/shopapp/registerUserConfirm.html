@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title></title>
+    </head>
+    <body>
+        <h1>以上の情報で登録しますか？</h1>
+        
+        <table>
+            <tr>
+                <th>会員ID</th>
+                <td>{{ register_user.user_id }}</td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>{{ register_user.password1 }}</td>
+            </tr>
+            <tr>
+                <th>お名前</th>
+                <td>{{ register_user.name }}</td>
+            </tr>
+            <tr>
+                <th>ご住所</th>
+                <td>{{ register_user.address }}</td>
+            </tr>
+        </table>           
+        <form action="{% url 'shopapp:register_user_confirm' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ register_user.user_id }}">
+            <input type="hidden" name="password1" value="{{ register_user.password1 }}">
+            <input type="hidden" name="password2" value="{{ register_user.password2 }}">
+            <input type="hidden" name="name" value="{{ register_user.name }}">
+            <input type="hidden" name="address" value="{{ register_user.address }}">
+            <input type="submit" value="登録">
+        </form>
+            <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+    </body>
+</html>

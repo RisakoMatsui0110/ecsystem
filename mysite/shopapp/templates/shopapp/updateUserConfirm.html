@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
+        <title></title>
+    </head>
+    <body>
+        <h1>以上の会員情報で更新しますか？</h1>
+        
+        <table>
+            <tr>
+                <th>会員ID</th>
+                <td>{{ update_user.user_id }}</td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>{{ update_user.password }}</td>
+            </tr>
+            <tr>
+                <th>お名前</th>
+                <td>{{ update_user.name }}</td>
+            </tr>
+            <tr>
+                <th>ご住所</th>
+                <td>{{ update_user.address }}</td>
+            </tr>
+        </table>           
+        <form action="{% url 'shopapp:update_user_confirm' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{ update_user.user_id }}">
+            <input type="hidden" name="password1" value="{{ update_user.password1 }}">
+            <input type="hidden" name="password2" value="{{ update_user.password2 }}">
+            <input type="hidden" name="name" value="{{ update_user.name }}">
+            <input type="hidden" name="address" value="{{ update_user.address }}">
+            <input type="submit" value="登録">
+        </form>
+    </body>
+</html>
