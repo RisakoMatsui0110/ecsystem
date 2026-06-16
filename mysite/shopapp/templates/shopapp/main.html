@@ -8,19 +8,35 @@
     </head>
     <body>
         <h1>商品の検索を行います。</h1>
-        
-        
-        <a href ="a">ショッピングカートを見る</a><br>
+        <form action = "{% url 'shopapp:search_result' %}" method="POST">
+            
+            <select name = "category" id = "items">
+                <option value = "all" selected>すべて</option>
+                <option value = "1" >家電</option>
+                <option value = "2" >パソコン・周辺機器</option>
+                <option value = "3" >文房具</option>
+                <option value = "4" >キッチン用品</option>
+                <option value = "5" >スポーツ用品</option>
+            </select>
+            
+            キーワード：<input type = "text" name = "keyword">
+            <button type="submit">検索</button>
+        </form>
+        {% if is_login == True %}
+        <a href ="{% url 'shopapp:cart' %}">ショッピングカートを見る</a><br>
+        {%else%}
+        <a href ="{% url 'shopapp:login' %}">ショッピングカートを見る</a><br>
+        {%endif%}
         <a href ="a">購入履歴</a><br>
 
         {% if is_login == True %}
-        <p>ようこそ{{name}}さん</p>
-        <a href ="{% url 'shopapp:user_info' %}">会員情報の確認</a><br>
-        <a href ="{% url 'shopapp:update_user' %}">会員情報の変更</a><br>
-        <a href ="{% url 'shopapp:logout' %}">ログアウト</a><br>
+            <p>ようこそ{{name}}さん</p>
+            <a href ="{% url 'shopapp:user_info' %}">会員情報の確認</a><br>
+            <a href ="{% url 'shopapp:update_user' %}">会員情報の変更</a><br>
+            <a href ="{% url 'shopapp:logout' %}">ログアウト</a><br>
         
         {%else%}
-        <a href ="{% url 'shopapp:login' %}">ログイン</a><br>
+            <a href ="{% url 'shopapp:login' %}">ログイン</a><br>
         {% endif %}
         
         <a href ="a">管理者ページ</a>

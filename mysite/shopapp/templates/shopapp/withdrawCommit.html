@@ -1,11 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
-        <title></title>
+        <title>退会完了</title>
     </head>
     <body>
-
+        <h1>{{user_name}}さん、退会処理を完了しました。</h1><br>
+        <h1>またのご利用をお待ちしております。</h1>
+        <a href ="{% url 'shopapp:login' %}">ログイン画面へ</a>
     </body>
 </html>

@@ -1,11 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
-        <title></title>
+        <title>商品詳細</title>
     </head>
     <body>
+        <h1>商品の詳細表示</h1>
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <td>{{item.name}}</td>
+            </tr>
+            <tr>
+                <th>商品の色</th>
+                <td>{{item.color}}</td>
+            </tr>
+            <tr>
+                <th>メーカー名</th>
+                <td>{{item.manufacturer}}</td>
+            </tr>
+            <tr>
+                <th>価格</th>
+                <td>{{item.price}}円</td>
+            </tr>
+            <tr>
+                <th>在庫数</th>
+                <td>{{item.stock}}個</td>
+            </tr>
+        </table>
+        {% if is_login == True %}
+        <form action = "{% url 'shopapp:cart' %}" method="POST">        
+            {% csrf_token %}
+            数量
+            <select name = "num" id = "num">
+                {% for num in numbers %}
+                <option value="{{ num }}">{{ num }}</option>
+                {% endfor %}
+            </select><br>
+            <input type="hidden" name="item_id" value="{{ item.item_id }}">
+            <input type="submit" value="ショッピングカートに入れる">
+        </form>
+        
+        {%else%}
+        <form action = "{% url 'shopapp:login' %}" method="GET">
+            数量
+            <select name = "num" id = "num">
+                {% for num in numbers %}
+                <option value="{{ num }}">{{ num }}</option>
+                {% endfor %}
+            </select>
+            <input type = "submit" value="ショッピングカートに入れる"><br>
+        </form>
+        {% endif %}
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>         
 
     </body>
 </html>

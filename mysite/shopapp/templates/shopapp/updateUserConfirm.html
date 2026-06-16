@@ -4,19 +4,23 @@
     <head>
         <meta charset="UTF-8">
         <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
-        <title></title>
+        <title>会員情報の更新</title>
     </head>
     <body>
         <h1>以上の会員情報で更新しますか？</h1>
         
-        <table>
+        <table border="1">
             <tr>
                 <th>会員ID</th>
                 <td>{{ update_user.user_id }}</td>
             </tr>
             <tr>
                 <th>パスワード</th>
-                <td>{{ update_user.password }}</td>
+                <td>
+                    {% for i in update_user.password1 %}
+                    *
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>お名前</th>
@@ -34,7 +38,9 @@
             <input type="hidden" name="password2" value="{{ update_user.password2 }}">
             <input type="hidden" name="name" value="{{ update_user.name }}">
             <input type="hidden" name="address" value="{{ update_user.address }}">
-            <input type="submit" value="登録">
+            <input type="submit" value="変更">
         </form>
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>         
+
     </body>
 </html>
