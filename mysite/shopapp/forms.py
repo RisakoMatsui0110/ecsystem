@@ -49,7 +49,7 @@ class UserUpdateForm(forms.Form):
         self.label_suffix = ""
         self.original_user_id = original_user_id
     
-    user_id = forms.CharField(label="会員ID")
+    user_id = forms.CharField(label="会員ID",widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     password1 = forms.CharField(label = "パスワード", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
     password2 = forms.CharField(label = "パスワード確認", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
     name = forms.CharField(label = "お名前")
@@ -60,16 +60,9 @@ class UserUpdateForm(forms.Form):
         user_id = cleaned_data.get("user_id")
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
-        print(user_id)
-        print(self.original_user_id)
         errors = []
         if password1 != password2:
-            errors.append("パスワードと確認用パスワードが一致しません")
-        if user_id != self.original_user_id:
-            if User.objects.filter(user_id=user_id).exists():
-                errors.append("この会員IDはすでに使用されています")
-        if errors:
-            raise forms.ValidationError(errors)
+            raise forms.ValidationError("パスワードと確認用パスワードが一致しません")
         return cleaned_data
     
 

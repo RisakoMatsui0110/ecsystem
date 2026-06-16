@@ -69,7 +69,7 @@ def searchResult(request):
         if keyword =="":
             search_item =Item.objects.filter(category_id=selected_category)
         else:
-            search_item =Item.objects.filter(category_id=selected_category ( Q(name__icontains=keyword) | Q(manufacturer__icontains = keyword)))
+            search_item =Item.objects.filter(Q(category_id=selected_category)& ( Q(name__icontains=keyword) | Q(manufacturer__icontains = keyword)))
 
     context = {
         "search_item" : search_item,
@@ -221,7 +221,7 @@ class UserUpdate(View):
 
 class UserUpdateConfirm(View):
     def post(self, request):
-        current_user = User.objects.filter(user_id=request.session["id"]).first()
+        current_user = User.objects.get(user_id=request.session["id"])
         form = UserUpdateForm(
             request.POST,
             original_user_id=current_user.user_id
