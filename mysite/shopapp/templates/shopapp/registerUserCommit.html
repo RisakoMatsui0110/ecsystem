@@ -7,7 +7,7 @@
         <title>会員登録の完了</title>
     </head>
     <body>
-        <p>{{register_user.name}}さんの会員登録が完了しました。</p>
-        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
+        <h1>{{register_user.name}}さんの会員登録が完了しました。</h1>
+        <a href ="{% url 'shopapp:login' %}">商品検索へ</a>
     </body>
 </html>

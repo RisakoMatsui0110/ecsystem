@@ -8,7 +8,24 @@
     </head>
     <body>
         <h1>以下の会員情報で更新しました。</h1>
-        {{ form.as_table }}
+        <table border="1">
+            <tr>
+                <th>会員ID</th>
+                <td>{{ update_user.user_id }}</td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>表示なし</td>
+            </tr>
+            <tr>
+                <th>お名前</th>
+                <td>{{ update_user.name }}</td>
+            </tr>
+            <tr>
+                <th>ご住所</th>
+                <td>{{ update_user.address }}</td>
+            </tr>
+        </table>           
         <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
     </body>
 </html>

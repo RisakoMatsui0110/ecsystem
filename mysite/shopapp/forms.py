@@ -1,5 +1,5 @@
 from django import forms
-from shopapp.models import User
+from shopapp.models import User, Category
 
 class UserLoginForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -7,7 +7,7 @@ class UserLoginForm(forms.Form):
         self.label_suffix = ""
     
     id = forms.CharField(label="会員ID")
-    password = forms.CharField(label = "パスワード")
+    password = forms.CharField(label = "パスワード", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
     
     def clean(self):
         cleaned_data = super().clean()
@@ -23,8 +23,8 @@ class UserRegisterForm(forms.Form):
         self.label_suffix = ""
     
     user_id = forms.CharField(label="会員ID")
-    password1 = forms.CharField(label = "パスワード")
-    password2 = forms.CharField(label = "パスワード確認")
+    password1 = forms.CharField(label = "パスワード" ,widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
+    password2 = forms.CharField(label = "パスワード確認", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
     name = forms.CharField(label = "お名前")
     address = forms.CharField(label = "ご住所")
     
@@ -50,8 +50,8 @@ class UserUpdateForm(forms.Form):
         self.original_user_id = original_user_id
     
     user_id = forms.CharField(label="会員ID")
-    password1 = forms.CharField(label = "パスワード")
-    password2 = forms.CharField(label = "パスワード確認")
+    password1 = forms.CharField(label = "パスワード", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
+    password2 = forms.CharField(label = "パスワード確認", widget=forms.PasswordInput(attrs={'placeholder': 'パスワード'}))
     name = forms.CharField(label = "お名前")
     address = forms.CharField(label = "ご住所")
     
@@ -60,6 +60,8 @@ class UserUpdateForm(forms.Form):
         user_id = cleaned_data.get("user_id")
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
+        print(user_id)
+        print(self.original_user_id)
         errors = []
         if password1 != password2:
             errors.append("パスワードと確認用パスワードが一致しません")
@@ -68,6 +70,13 @@ class UserUpdateForm(forms.Form):
                 errors.append("この会員IDはすでに使用されています")
         if errors:
             raise forms.ValidationError(errors)
-
         return cleaned_data
     
+
+class SearchForm(forms.Form):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        empty_label="すべて",
+        label = 'カテゴリ'
+    )
+

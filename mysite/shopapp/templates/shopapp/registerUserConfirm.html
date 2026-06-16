@@ -16,7 +16,11 @@
             </tr>
             <tr>
                 <th>パスワード</th>
-                <td>{{ register_user.password1 }}</td>
+                <td>
+                    {% for i in register_user.password1 %}
+                    *
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>お名前</th>

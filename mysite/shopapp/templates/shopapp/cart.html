@@ -1,11 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
-        <title></title>
+        <title>ショッピングカート</title>
     </head>
     <body>
+        <h1>ショッピングカート内の商品一覧</h1>
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>商品の色</th>
+                <th>メーカー名</th>
+                <th>単価</th>
+                <th>数量</th>                              
+            </tr>
+
+            {% for item in cart_items %}
+            <tr>
+                <td>{{item.item.name}}</td>
+                <td>{{item.item.color}}</td>
+                <td>{{item.item.manufacturer}}</td>
+                <td>{{item.item.price}}円</td>
+                <td>{{item.amount}}個</td>
+            </tr>
+            {% endfor %}
+        </table>
+        合計{{total_price}}円<br>
+        <button type="submit">購入する</button><br>
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>         
+
 
     </body>
 </html>

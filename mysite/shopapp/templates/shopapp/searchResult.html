@@ -1,11 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <link rel ="stylesheet" href ='{% static "shopapp/css/style.css" %}'>
-        <title></title>
+        <title>検索結果</title>
     </head>
     <body>
-
+        <h1>キーワード "{{keyword}}" カテゴリ "{{category}}" の検索結果</h1>
+        <table border="1">
+            <tr>
+                <th>商品名</th>
+                <th>商品の色</th>
+                <th>メーカー名</th>
+                <th>単価</th>               
+            </tr>
+            {% for item in search_item %}
+            <tr>
+                <th><a href = "{% url 'shopapp:item_detail' pk=item.item_id %}" >{{item.name}}</a></th>
+                <th>{{item.color}}</th>
+                <th>{{item.manufacturer}}</th>
+                <th>{{item.price}}円</th>
+            </tr>
+            {% endfor %}
+        </table>           
+        <a href ="{% url 'shopapp:main' %}">商品検索へ</a>
     </body>
 </html>
